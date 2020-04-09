@@ -8,6 +8,9 @@ from pathlib import Path
 f = Path('cn.html')
 orig = f.read_text()
 cn_decode = Path('cn-decode.html')
-cn_decode.write_text(html.unescape(orig))
+new = html.unescape(orig)
+BLACK_LIST = ['<br>', '']
+cleaned_decode = '\n'.join(line for line in new.splitlines() if line.strip() not in BLACK_LIST)
+cn_decode.write_text(cleaned_decode)
 
 
