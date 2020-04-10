@@ -1,4 +1,5 @@
 
+from markdownify import markdownify as mdf
 import requests
 import html
 from pathlib import Path
@@ -8,9 +9,14 @@ from pathlib import Path
 f = Path('cn.html')
 orig = f.read_text()
 cn_decode = Path('cn-decode.html')
-new = html.unescape(orig)
-BLACK_LIST = ['<br>', '']
-cleaned_decode = '\n'.join(line for line in new.splitlines() if line.strip() not in BLACK_LIST)
-cn_decode.write_text(cleaned_decode)
+cn_md = Path('cn.md')
+# new = html.unescape(orig)
+# BLACK_LIST = ['<br>', '']
+# cleaned_decode = '\n'.join(line for line in new.splitlines() if line.strip() not in BLACK_LIST)
+r = mdf(orig)
+print(r)
+cn_md.write_text(r)
+
+# cn_decode.write_text(cleaned_decode)
 
 
